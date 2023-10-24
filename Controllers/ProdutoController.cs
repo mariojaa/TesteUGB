@@ -4,24 +4,24 @@ using TesteUGB.Repositorio;
 
 namespace TesteUGB.Controllers
 {
-    [Route("api/usuario")]
+    [Route("api/produto")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
-        private readonly UsuarioRepository _usuarioRepository;
+        private readonly ProdutoRepository _produtoRepository;
 
-        public UsuarioController(UsuarioRepository usuarioRepositorio)
+        public ProdutoController(ProdutoRepository produtoRepository)
         {
-            _usuarioRepository = usuarioRepositorio;
+            _produtoRepository = produtoRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioModel>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<ProdutoModel>>> BuscarProdutos()
         {
             try
             {
-                var usuarios = await _usuarioRepository.Buscar();
-                return Ok(usuarios);
+                var produtos = await _produtoRepository.Buscar();
+                return Ok(produtos);
             }
             catch (Exception)
             {
@@ -30,27 +30,27 @@ namespace TesteUGB.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UsuarioModel>> GetUsuario(int id)
+        public async Task<ActionResult<ProdutoModel>> BuscarProduto(int id)
         {
-            var usuario = await _usuarioRepository.FindById(id);
-            if (usuario == null)
+            var produto = await _produtoRepository.FindById(id);
+            if (produto == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(produto);
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<UsuarioModel>> PostUsuario(UsuarioModel usuario)
+        public async Task<ActionResult<ProdutoModel>> InserirProduto(ProdutoModel produto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    await _usuarioRepository.Insert(usuario);
-                    return CreatedAtAction(nameof(GetUsuario), new { id = usuario.Id }, usuario);
+                    await _produtoRepository.Insert(produto);
+                    return CreatedAtAction(nameof(BuscarProduto), new { id = produto.Id }, produto);
                 }
                 return BadRequest(ModelState);
             }
@@ -61,16 +61,16 @@ namespace TesteUGB.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuario(int id, UsuarioModel usuario)
+        public async Task<IActionResult> AtualizarProduto(int id, ProdutoModel produto)
         {
-            if (id != usuario.Id)
+            if (id != produto.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                await _usuarioRepository.EditarUsuario(usuario);
+                await _produtoRepository.EditarProduto(produto);
                 return NoContent();
             }
             catch (Exception)
@@ -80,18 +80,18 @@ namespace TesteUGB.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UsuarioModel>> DeleteUsuario(int id)
+        public async Task<ActionResult<ProdutoModel>> DeletarProduto(int id)
         {
-            var usuario = await _usuarioRepository.FindById(id);
-            if (usuario == null)
+            var produto = await _produtoRepository.FindById(id);
+            if (produto == null)
             {
                 return NotFound();
             }
 
             try
             {
-                await _usuarioRepository.Remove(id);
-                return Ok(usuario);
+                await _produtoRepository.Remove(id);
+                return Ok(produto);
             }
             catch (Exception)
             {

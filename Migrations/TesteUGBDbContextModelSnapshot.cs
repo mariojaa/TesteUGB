@@ -93,9 +93,6 @@ namespace TesteUGB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
                     b.Property<string>("NomeProduto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

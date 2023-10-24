@@ -42,7 +42,6 @@ namespace TesteUGB.Migrations
                     FornecedorProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuantidadeEmEstoque = table.Column<int>(type: "int", nullable: false),
                     QuantidadeMinimaEmEstoque = table.Column<int>(type: "int", nullable: false),
-                    MyProperty = table.Column<int>(type: "int", nullable: false),
                     SetorDeDeposito = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataCadastroProduto = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataPrevisaoEntregaProduto = table.Column<DateTime>(type: "datetime2", nullable: false),

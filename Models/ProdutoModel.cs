@@ -1,4 +1,6 @@
-﻿namespace TesteUGB.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TesteUGB.Models
 {
     public class ProdutoModel
     {
@@ -8,7 +10,6 @@
         public string FornecedorProduto { get; set; }
         public int QuantidadeEmEstoque { get; set; }
         public int QuantidadeMinimaEmEstoque { get; set; }
-        public int MyProperty { get; set; }
         public string SetorDeDeposito { get; set; }
         public DateTime DataCadastroProduto { get; set; }
         public DateTime DataPrevisaoEntregaProduto { get; set; }
