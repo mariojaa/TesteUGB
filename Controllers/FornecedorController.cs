@@ -32,6 +32,24 @@ namespace TesteUGB.Controllers
             }
             return Ok(fornecedor);
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarFornecedor(int id, FornecedorModel fornecedor)
+        {
+            if (id != fornecedor.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _fornecedorRepository.AtualizarFornecedor(fornecedor);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
+            }
+        }
 
         [HttpPost]
         public async Task<ActionResult<FornecedorModel>> PostFornecedor(FornecedorModel fornecedor)
