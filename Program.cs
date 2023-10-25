@@ -18,7 +18,10 @@ namespace TesteUGB
             builder.Services.AddScoped<ProdutoRepository>();
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             builder.Services.AddScoped<UsuarioRepository>();
-
+            builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            builder.Services.AddScoped<FornecedorRepository>();
+            builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+            builder.Services.AddScoped<ServicoRepository>();
             builder.Services.AddControllersWithViews();
 
 
