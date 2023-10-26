@@ -22,6 +22,8 @@ namespace TesteUGB
             builder.Services.AddScoped<FornecedorRepository>();
             builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
             builder.Services.AddScoped<ServicoRepository>();
+            builder.Services.AddHealthChecks();
+            builder.Services.AddMvc();
             builder.Services.AddControllersWithViews();
 
 
