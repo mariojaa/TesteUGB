@@ -98,5 +98,6 @@ namespace TesteUGB.Controllers
                 return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
             }
         }
+
     }
 }

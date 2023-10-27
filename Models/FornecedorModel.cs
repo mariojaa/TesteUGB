@@ -1,4 +1,6 @@
-﻿namespace TesteUGB.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TesteUGB.Models
 {
     public class FornecedorModel
     {
@@ -13,5 +15,6 @@
         public string EmailFornecedor { get; set; } //Colocar Formato padrão de Email
         public long CNPJFornecedor { get; set; } //Colocar Formato padrão NPJ para cadastro
         public long InscricaoEstadualEMunicipalFornecedor { get; set; } //Colocar Formato padrão da inscrição
+        //public List<ServicoModel> Servicos { get; set; } //Relação Fornecedor 1:N
     }
 }

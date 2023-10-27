@@ -8,6 +8,7 @@ namespace TesteUGB.Models
         public string NomeProduto { get; set; }
         public int NumeroPedidoProduto { get; set; }
         public string FornecedorProduto { get; set; }
+        public int QuantidadeEntradaProduto { get; set; }
         public int QuantidadeEmEstoque { get; set; }
         public int QuantidadeMinimaEmEstoque { get; set; }
         public string SetorDeDeposito { get; set; }

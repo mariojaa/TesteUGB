@@ -60,24 +60,6 @@ namespace TesteUGB.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarProduto(int id, ProdutoModel produto)
-        {
-            if (id != produto.Id)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                await _produtoRepository.EditarProduto(produto);
-                return NoContent();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
-            }
-        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ProdutoModel>> DeletarProduto(int id)
