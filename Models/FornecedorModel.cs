@@ -15,6 +15,6 @@ namespace TesteUGB.Models
         public string EmailFornecedor { get; set; } //Colocar Formato padrão de Email
         public long CNPJFornecedor { get; set; } //Colocar Formato padrão NPJ para cadastro
         public long InscricaoEstadualEMunicipalFornecedor { get; set; } //Colocar Formato padrão da inscrição
-        //public List<ServicoModel> Servicos { get; set; } //Relação Fornecedor 1:N
+        public List<ServicoModel>? Servicos { get; set; }
     }
 }

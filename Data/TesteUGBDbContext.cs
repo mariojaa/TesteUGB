@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-//using TesteUGB.Data.Map;
+using TesteUGB.Data.Map;
 using TesteUGB.Models;
 
 namespace TesteUGB.Data
@@ -14,12 +14,12 @@ namespace TesteUGB.Data
         public DbSet<ServicoModel> Servicos { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.ApplyConfiguration(new FornecedorMap());
-        //    modelBuilder.ApplyConfiguration(new ServicoMap());
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new FornecedorMap());
+            modelBuilder.ApplyConfiguration(new ServicoMap());
 
-        //    base.OnModelCreating(modelBuilder);
-        //}
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

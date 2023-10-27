@@ -9,9 +9,12 @@ namespace TesteUGB.Models
         public int Id { get; set; }
         public string NomeDoServico { get; set; }
         public string DescricaoDoServico { get; set; }
-        public DateTime PrazoEntregaPadrao { get; set; } //Prazo Padrão para o tempo de serviço ser entregue (até x dias)
-        //[ForeignKey("ServicoId")]
-        //public int FornecedorId { get; set; }
-        //public FornecedorModel Fornecedor { get; set; }
+        public DateTime PrazoEntregaPadrao { get; set; }
+
+        [ForeignKey("Fornecedor")]
+        public int FornecedorId { get; set; }
+
+        [InverseProperty("Servicos")]
+        public FornecedorModel Fornecedor { get; set; }
     }
 }
