@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TesteUGB.Migrations
 {
-    public partial class FornecedorXServico : Migration
+    public partial class Inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,7 +82,8 @@ namespace TesteUGB.Migrations
                     NomeDoServico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DescricaoDoServico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrazoEntregaPadrao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FornecedorId = table.Column<int>(type: "int", nullable: false)
+                    FornecedorId = table.Column<int>(type: "int", nullable: false),
+                    NomeEmpresaFornecedora = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

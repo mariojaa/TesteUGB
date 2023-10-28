@@ -15,7 +15,8 @@ namespace TesteUGB.Repositorio
 
         public async Task<IEnumerable<ServicoModel>> Buscar()
         {
-            return await _context.Servicos.ToListAsync();
+          return await _context.Servicos.Include(s => s.Fornecedor).ToListAsync();
+            //return await _context.Servicos.ToListAsync();
         }
 
         public async Task<ServicoModel> FindById(int id)

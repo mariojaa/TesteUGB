@@ -15,4 +15,5 @@ public class ServicoModel
 
     [InverseProperty("Servicos")]
     public FornecedorModel Fornecedor { get; set; }
+    public string NomeEmpresaFornecedora { get; set; } // Nome da empresa fornecedora
 }

@@ -12,8 +12,8 @@ using TesteUGB.Data;
 namespace TesteUGB.Migrations
 {
     [DbContext(typeof(TesteUGBDbContext))]
-    [Migration("20231028003412_FornecedorXServico")]
-    partial class FornecedorXServico
+    [Migration("20231028145020_Inicio")]
+    partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,10 @@ namespace TesteUGB.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NomeDoServico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeEmpresaFornecedora")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

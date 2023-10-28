@@ -41,6 +41,10 @@ namespace TesteUGB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NomeEmpresaFornecedora")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("PrazoEntregaPadrao")
                         .HasColumnType("datetime2");
 
