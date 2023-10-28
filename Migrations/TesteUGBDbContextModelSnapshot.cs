@@ -22,6 +22,35 @@ namespace TesteUGB.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("ServicoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("DescricaoDoServico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FornecedorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomeDoServico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PrazoEntregaPadrao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.ToTable("Servicos");
+                });
+
             modelBuilder.Entity("TesteUGB.Models.FornecedorModel", b =>
                 {
                     b.Property<int>("Id")
@@ -128,35 +157,6 @@ namespace TesteUGB.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("TesteUGB.Models.ServicoModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("DescricaoDoServico")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FornecedorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NomeDoServico")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PrazoEntregaPadrao")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FornecedorId");
-
-                    b.ToTable("Servicos");
-                });
-
             modelBuilder.Entity("TesteUGB.Models.UsuarioModel", b =>
                 {
                     b.Property<int>("Id")
@@ -189,7 +189,7 @@ namespace TesteUGB.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("TesteUGB.Models.ServicoModel", b =>
+            modelBuilder.Entity("ServicoModel", b =>
                 {
                     b.HasOne("TesteUGB.Models.FornecedorModel", "Fornecedor")
                         .WithMany("Servicos")

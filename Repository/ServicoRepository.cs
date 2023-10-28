@@ -23,10 +23,16 @@ namespace TesteUGB.Repositorio
             return await _context.Servicos.FindAsync(id);
         }
 
-        public async Task Insert(ServicoModel servico)
+        //public async Task Insert(ServicoModel servico)
+        //{
+        //    _context.Servicos.Add(servico);
+        //    await _context.SaveChangesAsync();
+        //}
+        public async Task<int> Insert(ServicoModel servico)
         {
             _context.Servicos.Add(servico);
             await _context.SaveChangesAsync();
+            return servico.Id; // Retorna o ID do novo serviço inserido
         }
 
         public async Task EditarServico(ServicoModel servico)
