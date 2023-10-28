@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TesteUGB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 public class ServicoModel
 {
@@ -16,4 +17,5 @@ public class ServicoModel
     [InverseProperty("Servicos")]
     public FornecedorModel Fornecedor { get; set; }
     public string NomeEmpresaFornecedora { get; set; } // Nome da empresa fornecedora
+    public int ServicoId { get; set; }
 }

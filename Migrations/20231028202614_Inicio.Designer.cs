@@ -12,7 +12,7 @@ using TesteUGB.Data;
 namespace TesteUGB.Migrations
 {
     [DbContext(typeof(TesteUGBDbContext))]
-    [Migration("20231028145020_Inicio")]
+    [Migration("20231028202614_Inicio")]
     partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,11 +50,37 @@ namespace TesteUGB.Migrations
                     b.Property<DateTime>("PrazoEntregaPadrao")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FornecedorId");
 
                     b.ToTable("Servicos");
+                });
+
+            modelBuilder.Entity("SolicitacaoServicoModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("FornecedorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("SolicitacoesServico");
                 });
 
             modelBuilder.Entity("TesteUGB.Models.FornecedorModel", b =>
@@ -204,6 +230,25 @@ namespace TesteUGB.Migrations
                         .IsRequired();
 
                     b.Navigation("Fornecedor");
+                });
+
+            modelBuilder.Entity("SolicitacaoServicoModel", b =>
+                {
+                    b.HasOne("TesteUGB.Models.FornecedorModel", "Fornecedor")
+                        .WithMany()
+                        .HasForeignKey("FornecedorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("ServicoModel", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Fornecedor");
+
+                    b.Navigation("Servico");
                 });
 
             modelBuilder.Entity("TesteUGB.Models.FornecedorModel", b =>

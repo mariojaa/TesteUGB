@@ -83,7 +83,8 @@ namespace TesteUGB.Migrations
                     DescricaoDoServico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrazoEntregaPadrao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FornecedorId = table.Column<int>(type: "int", nullable: false),
-                    NomeEmpresaFornecedora = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NomeEmpresaFornecedora = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServicoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,10 +97,44 @@ namespace TesteUGB.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SolicitacoesServico",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServicoId = table.Column<int>(type: "int", nullable: false),
+                    FornecedorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SolicitacoesServico", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SolicitacoesServico_Fornecedores_FornecedorId",
+                        column: x => x.FornecedorId,
+                        principalTable: "Fornecedores",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SolicitacoesServico_Servicos_ServicoId",
+                        column: x => x.ServicoId,
+                        principalTable: "Servicos",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Servicos_FornecedorId",
                 table: "Servicos",
                 column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SolicitacoesServico_FornecedorId",
+                table: "SolicitacoesServico",
+                column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SolicitacoesServico_ServicoId",
+                table: "SolicitacoesServico",
+                column: "ServicoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -108,10 +143,13 @@ namespace TesteUGB.Migrations
                 name: "Produtos");
 
             migrationBuilder.DropTable(
-                name: "Servicos");
+                name: "SolicitacoesServico");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "Servicos");
 
             migrationBuilder.DropTable(
                 name: "Fornecedores");
