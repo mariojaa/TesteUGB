@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TesteUGB.Data;
+using TesteUGB.Repositories;
 using TesteUGB.Repositorio;
 
 namespace TesteUGB
@@ -22,6 +23,8 @@ namespace TesteUGB
             builder.Services.AddScoped<FornecedorRepository>();
             builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
             builder.Services.AddScoped<ServicoRepository>();
+            builder.Services.AddScoped<IComprasRepository, ComprasRepository>();
+            builder.Services.AddScoped<ComprasRepository>();
             builder.Services.AddHealthChecks();
             builder.Services.AddMvc();
             builder.Services.AddControllersWithViews();

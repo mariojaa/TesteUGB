@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 
 namespace TesteUGB.Models
 {
@@ -8,8 +8,7 @@ namespace TesteUGB.Models
         public string NomeProduto { get; set; }
         public int NumeroPedidoProduto { get; set; }
         public string FornecedorProduto { get; set; }
-        public int QuantidadeEntradaProduto { get; set; }
-        public int QuantidadeEmEstoque { get; set; }
+        public int QuantidadeTotalEmEstoque { get; set; }
         public int QuantidadeMinimaEmEstoque { get; set; }
         public string SetorDeDeposito { get; set; }
         public DateTime DataCadastroProduto { get; set; }
@@ -17,6 +16,6 @@ namespace TesteUGB.Models
         public string TipoDoProdutoUnitarioOuPacote { get; set; }
         public int ValorUnitarioDoProduto { get; set; }
         public long NumeroNotaFiscalProduto { get; set; }
-        public long CodigoEAN { get; set; } //Codigo de Barras do Produto
+        public long CodigoEAN { get; set; } // Código de Barras do Produto
     }
 }

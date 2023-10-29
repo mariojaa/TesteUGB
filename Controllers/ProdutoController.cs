@@ -8,9 +8,9 @@ namespace TesteUGB.Controllers
     [ApiController]
     public class ProdutoController : ControllerBase
     {
-        private readonly ProdutoRepository _produtoRepository;
+        private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutoController(ProdutoRepository produtoRepository)
+        public ProdutoController(IProdutoRepository produtoRepository)
         {
             _produtoRepository = produtoRepository;
         }
@@ -41,9 +41,8 @@ namespace TesteUGB.Controllers
             return Ok(produto);
         }
 
-
         [HttpPost]
-        public async Task<ActionResult<ProdutoModel>> InserirProduto(ProdutoModel produto)
+        public async Task<ActionResult<ProdutoModel>> InserirProduto([FromBody] ProdutoModel produto)
         {
             try
             {
@@ -60,6 +59,31 @@ namespace TesteUGB.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AtualizarProduto(int id, [FromBody] ProdutoModel produtoEditado)
+        {
+            if (produtoEditado == null || produtoEditado.Id != id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var produtoExistente = await _produtoRepository.FindById(id);
+                if (produtoExistente == null)
+                {
+                    return NotFound();
+                }
+
+                await _produtoRepository.Update(produtoEditado);
+
+                return Ok(produtoEditado);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
+            }
+        }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ProdutoModel>> DeletarProduto(int id)

@@ -14,6 +14,7 @@ namespace TesteUGB.Data
         public DbSet<ProdutoModel> Produtos { get; set; }
         public DbSet<ServicoModel> Servicos { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
+        public DbSet<ComprasModel> Compras { get; set; }
         public DbSet<SolicitacaoServicoModel> SolicitacoesServico { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

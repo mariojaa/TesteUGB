@@ -81,6 +81,58 @@ namespace TesteUGB.Migrations
                     b.ToTable("SolicitacoesServico");
                 });
 
+            modelBuilder.Entity("TesteUGB.Models.ComprasModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CodigoDaSolicitacao")
+                        .HasColumnType("int");
+
+                    b.Property<long>("CodigoEAN")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DataPrevisaoEntregaProduto")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataSolicitada")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DepartamentoSolicitante")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fabricante")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeProduto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("NumeroNotaFiscalProduto")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("QuantidadeSolicitada")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoDoProduto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorTotal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorUnitarioDoProduto")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Compras");
+                });
+
             modelBuilder.Entity("TesteUGB.Models.FornecedorModel", b =>
                 {
                     b.Property<int>("Id")
@@ -162,13 +214,10 @@ namespace TesteUGB.Migrations
                     b.Property<int>("NumeroPedidoProduto")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuantidadeEmEstoque")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeEntradaProduto")
-                        .HasColumnType("int");
-
                     b.Property<int>("QuantidadeMinimaEmEstoque")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeTotalEmEstoque")
                         .HasColumnType("int");
 
                     b.Property<string>("SetorDeDeposito")

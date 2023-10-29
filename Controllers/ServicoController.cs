@@ -41,24 +41,6 @@ namespace TesteUGB.Controllers
             return Ok(usuario);
         }
 
-
-        //[HttpPost]
-        //public async Task<ActionResult<ServicoModel>> InserirServico(ServicoModel servico)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            await _servicoRepository.Insert(servico);
-        //            return CreatedAtAction(nameof(InserirServico), new { id = servico.Id }, servico);
-        //        }
-        //        return BadRequest(ModelState);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
-        //    }
-        //}
         [HttpPost]
         public async Task<ActionResult<ServicoModel>> InserirServico(ServicoModel servico)
         {
