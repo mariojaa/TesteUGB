@@ -12,7 +12,7 @@ using TesteUGB.Data;
 namespace TesteUGB.Migrations
 {
     [DbContext(typeof(TesteUGBDbContext))]
-    [Migration("20231029212318_Inicio")]
+    [Migration("20231029222023_Inicio")]
     partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -155,6 +155,12 @@ namespace TesteUGB.Migrations
 
                     b.Property<long>("NumeroNotaFiscalProduto")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeAtualEmEstoque")
+                        .HasColumnType("int");
 
                     b.Property<int>("QuantidadeMinimaEmEstoque")
                         .HasColumnType("int");

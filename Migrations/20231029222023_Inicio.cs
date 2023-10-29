@@ -46,7 +46,9 @@ namespace TesteUGB.Migrations
                     DataCadastroProduto = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TipoDoProdutoUnitarioOuPacote = table.Column<int>(type: "int", nullable: false),
                     NumeroNotaFiscalProduto = table.Column<long>(type: "bigint", nullable: false),
-                    CodigoEAN = table.Column<long>(type: "bigint", nullable: false)
+                    CodigoEAN = table.Column<long>(type: "bigint", nullable: false),
+                    QuantidadeAtualEmEstoque = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

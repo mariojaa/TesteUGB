@@ -154,6 +154,12 @@ namespace TesteUGB.Migrations
                     b.Property<long>("NumeroNotaFiscalProduto")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeAtualEmEstoque")
+                        .HasColumnType("int");
+
                     b.Property<int>("QuantidadeMinimaEmEstoque")
                         .HasColumnType("int");
 

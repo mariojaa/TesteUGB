@@ -1,10 +1,18 @@
-﻿using TesteUGB.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
+using TesteUGB.Data;
+using TesteUGB.Models;
 
 namespace TesteUGB.Repositories
 {
     public class ComprasRepository : IComprasRepository
     {
         private List<ComprasModel> compras = new List<ComprasModel>();
+        private readonly TesteUGBDbContext _context;
+        public ComprasRepository(TesteUGBDbContext context)
+        {
+            _context = context;
+        }
 
         public List<ComprasModel> GetAllCompras()
         {
@@ -21,26 +29,13 @@ namespace TesteUGB.Repositories
             compras.Add(compra);
         }
 
-        public void UpdateCompra(int id, ComprasModel compra)
+        public async Task<ComprasModel> EditarCompras(ComprasModel compras)
         {
-            var existingCompra = compras.FirstOrDefault(c => c.Id == id);
-            if (existingCompra != null)
-            {
-                // Atualiza os dados da compra existente com os novos dados.
-                existingCompra.NomeProduto = compra.NomeProduto;
-                existingCompra.CodigoDaSolicitacao = compra.CodigoDaSolicitacao;
-                existingCompra.Fabricante = compra.Fabricante;
-                existingCompra.QuantidadeSolicitada = compra.QuantidadeSolicitada;
-                existingCompra.DepartamentoSolicitante = compra.DepartamentoSolicitante;
-                existingCompra.DataSolicitada = compra.DataSolicitada;
-                existingCompra.DataPrevisaoEntregaProduto = compra.DataPrevisaoEntregaProduto;
-                existingCompra.TipoDoProduto = compra.TipoDoProduto;
-                existingCompra.ValorUnitarioDoProduto = compra.ValorUnitarioDoProduto;
-                existingCompra.ValorTotal = compra.QuantidadeSolicitada * compra.ValorUnitarioDoProduto;
-                existingCompra.NumeroNotaFiscalProduto = compra.NumeroNotaFiscalProduto;
-                existingCompra.CodigoEAN = compra.CodigoEAN;
-            }
+            _context.Compras.Update(compras);
+            await _context.SaveChangesAsync();
+            return compras;
         }
+
 
         public void DeleteCompra(int id)
         {
@@ -48,6 +43,24 @@ namespace TesteUGB.Repositories
             if (compra != null)
             {
                 compras.Remove(compra);
+            }
+        }
+        public async Task<ComprasModel> Update(ComprasModel obj, int id)
+        {
+            if (!await _context.Compras.AnyAsync(x => x.Id == id))
+            {
+                throw new KeyNotFoundException("Id não encontrado");
+            }
+
+            try
+            {
+                _context.Update(obj);
+                await _context.SaveChangesAsync();
+                return obj;
+            }
+            catch (DBConcurrencyException e)
+            {
+                throw new DBConcurrencyException(e.Message);
             }
         }
     }

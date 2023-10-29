@@ -7,7 +7,8 @@ namespace TesteUGB.Repositories
         List<ComprasModel> GetAllCompras();
         ComprasModel GetCompraById(int id);
         void AddCompra(ComprasModel compra);
-        void UpdateCompra(int id, ComprasModel compra);
+        Task<ComprasModel> Update(ComprasModel obj, int id);
         void DeleteCompra(int id);
+        Task<ComprasModel> EditarCompras(ComprasModel compras);
     }
 }

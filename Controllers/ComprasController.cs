@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TesteUGB.Data;
 using TesteUGB.Models;
+using TesteUGB.Repositories;
 
 namespace TesteUGB.Controllers
 {
@@ -13,10 +14,12 @@ namespace TesteUGB.Controllers
     public class ComprasController : ControllerBase
     {
         private readonly TesteUGBDbContext _context;
+        private readonly ComprasRepository _comprasRepository;
 
-        public ComprasController(TesteUGBDbContext context)
+        public ComprasController(TesteUGBDbContext context, ComprasRepository comprasRepository)
         {
             _context = context;
+            _comprasRepository = comprasRepository;
         }
 
         [HttpGet]
@@ -51,35 +54,24 @@ namespace TesteUGB.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ComprasModel compra)
+        public async Task<IActionResult> EditarCompra(int id, ComprasModel compras)
         {
-            var existingCompra = _context.Compras.Find(id);
-            if (existingCompra == null)
+            if (id != compras.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            // Atualiza os dados da compra existente com os novos dados.
-            existingCompra.NomeProduto = compra.NomeProduto;
-            existingCompra.CodigoDaSolicitacao = compra.CodigoDaSolicitacao;
-            existingCompra.Fabricante = compra.Fabricante;
-            existingCompra.QuantidadeSolicitada = compra.QuantidadeSolicitada;
-            existingCompra.DepartamentoSolicitante = compra.DepartamentoSolicitante;
-            existingCompra.DataSolicitada = compra.DataSolicitada;
-            existingCompra.DataPrevisaoEntregaProduto = compra.DataPrevisaoEntregaProduto;
-            existingCompra.TipoDoProduto = compra.TipoDoProduto;
-            existingCompra.ValorUnitarioDoProduto = compra.ValorUnitarioDoProduto;
-
-            // Recalcula o ValorTotal após a atualização.
-            existingCompra.ValorTotal = existingCompra.QuantidadeSolicitada * existingCompra.ValorUnitarioDoProduto;
-
-            existingCompra.NumeroNotaFiscalProduto = compra.NumeroNotaFiscalProduto;
-            existingCompra.CodigoEAN = compra.CodigoEAN;
-
-            _context.SaveChanges(); // Salva as alterações no banco de dados.
-
-            return NoContent();
+            try
+            {
+                await _comprasRepository.EditarCompras(compras);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
+            }
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
@@ -96,5 +88,6 @@ namespace TesteUGB.Controllers
 
             return NoContent();
         }
+
     }
 }
