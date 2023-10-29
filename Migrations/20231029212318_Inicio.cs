@@ -34,6 +34,26 @@ namespace TesteUGB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Estoque",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomeProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QuantidadeTotalEmEstoque = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeMinimaEmEstoque = table.Column<int>(type: "int", nullable: false),
+                    SetorDeDeposito = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataCadastroProduto = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TipoDoProdutoUnitarioOuPacote = table.Column<int>(type: "int", nullable: false),
+                    NumeroNotaFiscalProduto = table.Column<long>(type: "bigint", nullable: false),
+                    CodigoEAN = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estoque", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fornecedores",
                 columns: table => new
                 {
@@ -53,30 +73,6 @@ namespace TesteUGB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fornecedores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Produtos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumeroPedidoProduto = table.Column<int>(type: "int", nullable: false),
-                    FornecedorProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QuantidadeTotalEmEstoque = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeMinimaEmEstoque = table.Column<int>(type: "int", nullable: false),
-                    SetorDeDeposito = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataCadastroProduto = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataPrevisaoEntregaProduto = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TipoDoProdutoUnitarioOuPacote = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ValorUnitarioDoProduto = table.Column<int>(type: "int", nullable: false),
-                    NumeroNotaFiscalProduto = table.Column<long>(type: "bigint", nullable: false),
-                    CodigoEAN = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,7 +162,7 @@ namespace TesteUGB.Migrations
                 name: "Compras");
 
             migrationBuilder.DropTable(
-                name: "Produtos");
+                name: "Estoque");
 
             migrationBuilder.DropTable(
                 name: "SolicitacoesServico");

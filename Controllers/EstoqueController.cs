@@ -4,23 +4,23 @@ using TesteUGB.Repositorio;
 
 namespace TesteUGB.Controllers
 {
-    [Route("api/produto")]
+    [Route("api/estoque")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class EstoqueController : ControllerBase
     {
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IEstoqueRepository _estoqueRepository;
 
-        public ProdutoController(IProdutoRepository produtoRepository)
+        public EstoqueController(IEstoqueRepository estoqueRepository)
         {
-            _produtoRepository = produtoRepository;
+            _estoqueRepository = estoqueRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProdutoModel>>> BuscarProdutos()
+        public async Task<ActionResult<IEnumerable<EstoqueModel>>> BuscarProdutos()
         {
             try
             {
-                var produtos = await _produtoRepository.Buscar();
+                var produtos = await _estoqueRepository.Buscar();
                 return Ok(produtos);
             }
             catch (Exception)
@@ -30,9 +30,9 @@ namespace TesteUGB.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProdutoModel>> BuscarProduto(int id)
+        public async Task<ActionResult<EstoqueModel>> BuscarProduto(int id)
         {
-            var produto = await _produtoRepository.FindById(id);
+            var produto = await _estoqueRepository.FindById(id);
             if (produto == null)
             {
                 return NotFound();
@@ -42,13 +42,13 @@ namespace TesteUGB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProdutoModel>> InserirProduto([FromBody] ProdutoModel produto)
+        public async Task<ActionResult<EstoqueModel>> InserirProduto([FromBody] EstoqueModel produto)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    await _produtoRepository.Insert(produto);
+                    await _estoqueRepository.Insert(produto);
                     return CreatedAtAction(nameof(BuscarProduto), new { id = produto.Id }, produto);
                 }
                 return BadRequest(ModelState);
@@ -60,7 +60,7 @@ namespace TesteUGB.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarProduto(int id, [FromBody] ProdutoModel produtoEditado)
+        public async Task<IActionResult> AtualizarProduto(int id, [FromBody] EstoqueModel produtoEditado)
         {
             if (produtoEditado == null || produtoEditado.Id != id)
             {
@@ -69,13 +69,13 @@ namespace TesteUGB.Controllers
 
             try
             {
-                var produtoExistente = await _produtoRepository.FindById(id);
+                var produtoExistente = await _estoqueRepository.FindById(id);
                 if (produtoExistente == null)
                 {
                     return NotFound();
                 }
 
-                await _produtoRepository.Update(produtoEditado);
+                await _estoqueRepository.Update(produtoEditado);
 
                 return Ok(produtoEditado);
             }
@@ -86,9 +86,9 @@ namespace TesteUGB.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ProdutoModel>> DeletarProduto(int id)
+        public async Task<ActionResult<EstoqueModel>> DeletarProduto(int id)
         {
-            var produto = await _produtoRepository.FindById(id);
+            var produto = await _estoqueRepository.FindById(id);
             if (produto == null)
             {
                 return NotFound();
@@ -96,7 +96,7 @@ namespace TesteUGB.Controllers
 
             try
             {
-                await _produtoRepository.Remove(id);
+                await _estoqueRepository.Remove(id);
                 return Ok(produto);
             }
             catch (Exception)

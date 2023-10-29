@@ -11,7 +11,7 @@ namespace TesteUGB.Data
         }
 
         public DbSet<FornecedorModel> Fornecedores { get; set; }
-        public DbSet<ProdutoModel> Produtos { get; set; }
+        public DbSet<EstoqueModel> Estoque { get; set; }
         public DbSet<ServicoModel> Servicos { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
         public DbSet<ComprasModel> Compras { get; set; }
@@ -22,7 +22,7 @@ namespace TesteUGB.Data
             modelBuilder.ApplyConfiguration(new FornecedorMap());
             modelBuilder.ApplyConfiguration(new ServicoMap());
 
-            // Defina o comportamento NO ACTION para as chaves estrangeiras.
+            
             modelBuilder.Entity<SolicitacaoServicoModel>()
                 .HasOne(s => s.Servico)
                 .WithMany()

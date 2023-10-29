@@ -12,7 +12,7 @@ using TesteUGB.Data;
 namespace TesteUGB.Migrations
 {
     [DbContext(typeof(TesteUGBDbContext))]
-    [Migration("20231029185056_Inicio")]
+    [Migration("20231029212318_Inicio")]
     partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,6 +135,45 @@ namespace TesteUGB.Migrations
                     b.ToTable("Compras");
                 });
 
+            modelBuilder.Entity("TesteUGB.Models.EstoqueModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<long>("CodigoEAN")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DataCadastroProduto")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NomeProduto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("NumeroNotaFiscalProduto")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("QuantidadeMinimaEmEstoque")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeTotalEmEstoque")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SetorDeDeposito")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipoDoProdutoUnitarioOuPacote")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Estoque");
+                });
+
             modelBuilder.Entity("TesteUGB.Models.FornecedorModel", b =>
                 {
                     b.Property<int>("Id")
@@ -183,59 +222,6 @@ namespace TesteUGB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fornecedores");
-                });
-
-            modelBuilder.Entity("TesteUGB.Models.ProdutoModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<long>("CodigoEAN")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("DataCadastroProduto")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataPrevisaoEntregaProduto")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FornecedorProduto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NomeProduto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("NumeroNotaFiscalProduto")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("NumeroPedidoProduto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeMinimaEmEstoque")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeTotalEmEstoque")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SetorDeDeposito")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TipoDoProdutoUnitarioOuPacote")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ValorUnitarioDoProduto")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("TesteUGB.Models.UsuarioModel", b =>

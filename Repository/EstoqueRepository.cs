@@ -1,39 +1,35 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TesteUGB.Data;
 using TesteUGB.Models;
 
 namespace TesteUGB.Repositorio
 {
-    public class ProdutoRepository : IProdutoRepository
+    public class EstoqueRepository : IEstoqueRepository
     {
         private readonly TesteUGBDbContext _context;
 
-        public ProdutoRepository(TesteUGBDbContext context)
+        public EstoqueRepository(TesteUGBDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<ProdutoModel>> Buscar()
+        public async Task<IEnumerable<EstoqueModel>> Buscar()
         {
-            return await _context.Produtos.ToListAsync();
+            return await _context.Estoque.ToListAsync();
         }
 
-        public async Task<ProdutoModel> FindById(int id)
+        public async Task<EstoqueModel> FindById(int id)
         {
-            return await _context.Produtos.FindAsync(id);
+            return await _context.Estoque.FindAsync(id);
         }
 
-        public async Task Insert(ProdutoModel produto)
+        public async Task Insert(EstoqueModel produto)
         {
-            _context.Produtos.Add(produto);
+            _context.Estoque.Add(produto);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(ProdutoModel produto)
+        public async Task Update(EstoqueModel produto)
         {
             _context.Entry(produto).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -41,19 +37,19 @@ namespace TesteUGB.Repositorio
 
         public async Task Remove(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
-            _context.Produtos.Remove(produto);
+            var produto = await _context.Estoque.FindAsync(id);
+            _context.Estoque.Remove(produto);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ProdutoModel> FindByNomeProduto(string nomeProduto)
+        public async Task<EstoqueModel> FindByNomeProduto(string nomeProduto)
         {
-            return await _context.Produtos.FirstOrDefaultAsync(p => p.NomeProduto == nomeProduto);
+            return await _context.Estoque.FirstOrDefaultAsync(p => p.NomeProduto == nomeProduto);
         }
 
-        public async Task RegistrarEntradaProduto(ProdutoModel produto)
+        public async Task RegistrarEntradaProduto(EstoqueModel produto)
         {
-            var existingProduct = await _context.Produtos.FirstOrDefaultAsync(p => p.NomeProduto == produto.NomeProduto);
+            var existingProduct = await _context.Estoque.FirstOrDefaultAsync(p => p.NomeProduto == produto.NomeProduto);
 
             if (existingProduct != null)
             {
@@ -62,14 +58,14 @@ namespace TesteUGB.Repositorio
             }
             else
             {
-                _context.Produtos.Add(produto);
+                _context.Estoque.Add(produto);
                 await _context.SaveChangesAsync();
             }
         }
 
         public async Task RegistrarSaidaProduto(int produtoId, int quantidadeSaida, string usuario, string departamento)
         {
-            var produtoExistente = await _context.Produtos.FindAsync(produtoId);
+            var produtoExistente = await _context.Estoque.FindAsync(produtoId);
             if (produtoExistente != null && produtoExistente.QuantidadeTotalEmEstoque >= quantidadeSaida)
             {
                 produtoExistente.QuantidadeTotalEmEstoque -= quantidadeSaida;
