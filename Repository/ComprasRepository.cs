@@ -7,26 +7,27 @@ namespace TesteUGB.Repositories
 {
     public class ComprasRepository : IComprasRepository
     {
-        private List<ComprasModel> compras = new List<ComprasModel>();
         private readonly TesteUGBDbContext _context;
         public ComprasRepository(TesteUGBDbContext context)
         {
             _context = context;
         }
 
-        public List<ComprasModel> GetAllCompras()
+        public async Task<List<ComprasModel>> GetAllComprasAsync()
         {
-            return compras;
+            return await _context.Compras.ToListAsync();
         }
 
-        public ComprasModel GetCompraById(int id)
+        public async Task<ComprasModel> GetCompraByIdAsync(int id)
         {
-            return compras.FirstOrDefault(c => c.Id == id);
+            return await _context.Compras.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void AddCompra(ComprasModel compra)
+        public async Task<ComprasModel> AddCompraAsync(ComprasModel compra)
         {
-            compras.Add(compra);
+            _context.Add(compra);
+            await _context.SaveChangesAsync();
+            return compra;
         }
 
         public async Task<ComprasModel> EditarCompras(ComprasModel compras)
@@ -37,13 +38,16 @@ namespace TesteUGB.Repositories
         }
 
 
-        public void DeleteCompra(int id)
+        public async Task<bool> DeleteCompraAsync(int id)
         {
-            var compra = compras.FirstOrDefault(c => c.Id == id);
-            if (compra != null)
+            var obj = await _context.Compras.FindAsync(id);
+            if (obj != null)
             {
-                compras.Remove(compra);
+                _context.Compras.Remove(obj);
+                await _context.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
         public async Task<ComprasModel> Update(ComprasModel obj, int id)
         {

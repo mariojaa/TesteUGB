@@ -4,11 +4,11 @@ namespace TesteUGB.Repositories
 {
     public interface IComprasRepository
     {
-        List<ComprasModel> GetAllCompras();
-        ComprasModel GetCompraById(int id);
-        void AddCompra(ComprasModel compra);
+        Task<List<ComprasModel>> GetAllComprasAsync();
+        Task<ComprasModel> GetCompraByIdAsync(int id);
+        Task<ComprasModel> AddCompraAsync(ComprasModel compra);
         Task<ComprasModel> Update(ComprasModel obj, int id);
-        void DeleteCompra(int id);
+        Task<bool> DeleteCompraAsync(int id);
         Task<ComprasModel> EditarCompras(ComprasModel compras);
     }
 }
