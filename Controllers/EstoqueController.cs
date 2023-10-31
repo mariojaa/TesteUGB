@@ -4,6 +4,8 @@ using TesteUGB.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using TesteUGB.Data;
 
 namespace TesteUGB.Controllers
 {
@@ -12,10 +14,12 @@ namespace TesteUGB.Controllers
     public class EstoqueController : ControllerBase
     {
         private readonly IEstoqueRepository _estoqueRepository;
+        private readonly TesteUGBDbContext _context;
 
-        public EstoqueController(IEstoqueRepository estoqueRepository)
+        public EstoqueController(IEstoqueRepository estoqueRepository, TesteUGBDbContext context)
         {
             _estoqueRepository = estoqueRepository;
+            _context = context;
         }
 
         [HttpGet]
@@ -83,23 +87,19 @@ namespace TesteUGB.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<EstoqueModel>> DeletarProduto(int id)
+        public IActionResult Delete(int id)
         {
-            var produto = await _estoqueRepository.FindById(id);
-            if (produto == null)
+            var estoque = _context.Estoque.Find(id);
+            if (estoque == null)
             {
                 return NotFound();
             }
 
-            try
-            {
-                await _estoqueRepository.Remove(id);
-                return Ok(produto);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
-            }
+            // Remove a compra do contexto e salva as alterações no banco de dados.
+            _context.Estoque.Remove(estoque);
+            _context.SaveChanges();
+
+            return NoContent();
         }
 
         [HttpPatch("{id}/entrada")]
