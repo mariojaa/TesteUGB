@@ -23,8 +23,8 @@ namespace TesteUGB.Migrations
                     DataSolicitada = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataPrevisaoEntregaProduto = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TipoDoProduto = table.Column<int>(type: "int", nullable: false),
-                    ValorUnitarioDoProduto = table.Column<int>(type: "int", nullable: false),
-                    ValorTotal = table.Column<int>(type: "int", nullable: false),
+                    ValorUnitarioDoProduto = table.Column<double>(type: "float", nullable: false),
+                    ValorTotal = table.Column<double>(type: "float", nullable: false),
                     NumeroNotaFiscalProduto = table.Column<long>(type: "bigint", nullable: false),
                     CodigoEAN = table.Column<long>(type: "bigint", nullable: false)
                 },

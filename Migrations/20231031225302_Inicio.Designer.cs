@@ -12,7 +12,7 @@ using TesteUGB.Data;
 namespace TesteUGB.Migrations
 {
     [DbContext(typeof(TesteUGBDbContext))]
-    [Migration("20231031204118_Inicio")]
+    [Migration("20231031225302_Inicio")]
     partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,11 +124,11 @@ namespace TesteUGB.Migrations
                     b.Property<int>("TipoDoProduto")
                         .HasColumnType("int");
 
-                    b.Property<int>("ValorTotal")
-                        .HasColumnType("int");
+                    b.Property<double>("ValorTotal")
+                        .HasColumnType("float");
 
-                    b.Property<int>("ValorUnitarioDoProduto")
-                        .HasColumnType("int");
+                    b.Property<double>("ValorUnitarioDoProduto")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

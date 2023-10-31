@@ -42,9 +42,8 @@ namespace TesteUGB.Controllers
             // Calcular o ValorTotal com base na QuantidadeSolicitada e ValorUnitarioDoProduto.
             compra.ValorTotal = compra.QuantidadeSolicitada * compra.ValorUnitarioDoProduto;
 
-            // Adiciona a compra ao contexto do Entity Framework para persistência.
             _context.Compras.Add(compra);
-            _context.SaveChanges(); // Salva no banco de dados.
+            _context.SaveChanges();
 
             return CreatedAtAction("Get", new { id = compra.Id }, compra);
         }

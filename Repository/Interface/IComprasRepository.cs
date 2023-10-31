@@ -10,5 +10,6 @@ namespace TesteUGB.Repositories
         Task<ComprasModel> Update(ComprasModel obj, int id);
         Task<bool> DeleteCompraAsync(int id);
         Task<ComprasModel> EditarCompras(ComprasModel compras);
+        Task<ComprasModel> BuscarPedidoPorIdAsync(int id);
     }
 }

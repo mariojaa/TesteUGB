@@ -122,11 +122,11 @@ namespace TesteUGB.Migrations
                     b.Property<int>("TipoDoProduto")
                         .HasColumnType("int");
 
-                    b.Property<int>("ValorTotal")
-                        .HasColumnType("int");
+                    b.Property<double>("ValorTotal")
+                        .HasColumnType("float");
 
-                    b.Property<int>("ValorUnitarioDoProduto")
-                        .HasColumnType("int");
+                    b.Property<double>("ValorUnitarioDoProduto")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

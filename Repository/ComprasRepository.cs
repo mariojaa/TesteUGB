@@ -67,5 +67,9 @@ namespace TesteUGB.Repositories
                 throw new DBConcurrencyException(e.Message);
             }
         }
+        public async Task<ComprasModel> BuscarPedidoPorIdAsync (int id)
+        {
+            return await _context.Compras.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }
