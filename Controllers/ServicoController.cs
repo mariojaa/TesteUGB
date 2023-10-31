@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TesteUGB.Data;
 using TesteUGB.Models;
 using TesteUGB.Repositorio;
 
@@ -9,10 +11,11 @@ namespace TesteUGB.Controllers
     public class ServicoController : ControllerBase
     {
         private readonly ServicoRepository _servicoRepository;
-
-        public ServicoController(ServicoRepository servicoRepository)
+        private readonly TesteUGBDbContext _context;
+        public ServicoController(ServicoRepository servicoRepository, TesteUGBDbContext context)
         {
             _servicoRepository = servicoRepository;
+            _context = context;
         }
 
         [HttpGet]
@@ -79,25 +82,21 @@ namespace TesteUGB.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ServicoModel>> DeleteServico(int id)
-        {
-            var usuario = await _servicoRepository.FindById(id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    var servico = _context.Servicos.Find(id);
+        //    if (servico == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            try
-            {
-                await _servicoRepository.Remove(id);
-                return Ok(usuario);
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
-            }
-        }
+        //    // Remove a compra do contexto e salva as alterações no banco de dados.
+        //    _context.Servicos.Remove(servico);
+        //    _context.SaveChanges();
+
+        //    return NoContent();
+        //}
 
     }
 }
