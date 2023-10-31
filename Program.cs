@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TesteUGB.Data;
+using TesteUGB.Models;
 using TesteUGB.Repositories;
 using TesteUGB.Repositorio;
+using TesteUGB.Repository.Interface;
 
 namespace TesteUGB
 {
@@ -15,6 +17,7 @@ namespace TesteUGB
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Database"));
             });
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddScoped<IEstoqueRepository, EstoqueRepository>();
             builder.Services.AddScoped<EstoqueRepository>();
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -25,8 +28,15 @@ namespace TesteUGB
             builder.Services.AddScoped<ServicoRepository>();
             builder.Services.AddScoped<IComprasRepository, ComprasRepository>();
             builder.Services.AddScoped<ComprasRepository>();
+            builder.Services.AddScoped<IEmail, Email>();
+            //builder.Services.AddScoped<ISessao, Sessao>();
             builder.Services.AddHealthChecks();
             builder.Services.AddMvc();
+            builder.Services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
             builder.Services.AddControllersWithViews();
 
 
@@ -48,6 +58,7 @@ namespace TesteUGB
 
             app.UseAuthorization();
 
+            app.UseSession();
 
             app.MapControllers();
 

@@ -8,8 +8,8 @@ namespace TesteUGB.Data
     {
         public TesteUGBDbContext(DbContextOptions<TesteUGBDbContext> options) : base(options)
         {
-        }
 
+        }
         public DbSet<FornecedorModel> Fornecedores { get; set; }
         public DbSet<EstoqueModel> Estoque { get; set; }
         public DbSet<ServicoModel> Servicos { get; set; }
