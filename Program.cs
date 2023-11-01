@@ -1,3 +1,5 @@
+using DinkToPdf.Contracts;
+using DinkToPdf;
 using Microsoft.EntityFrameworkCore;
 using TesteUGB.Data;
 using TesteUGB.Models;
@@ -29,6 +31,7 @@ namespace TesteUGB
             builder.Services.AddScoped<IComprasRepository, ComprasRepository>();
             builder.Services.AddScoped<ComprasRepository>();
             builder.Services.AddScoped<IEmail, Email>();
+            builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             //builder.Services.AddScoped<ISessao, Sessao>();
             builder.Services.AddHealthChecks();
             builder.Services.AddMvc();

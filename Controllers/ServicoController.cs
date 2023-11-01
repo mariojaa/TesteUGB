@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TesteUGB.Data;
-using TesteUGB.Models;
 using TesteUGB.Repositorio;
 
 namespace TesteUGB.Controllers
@@ -81,22 +79,6 @@ namespace TesteUGB.Controllers
                 return StatusCode(500, "Ops, sem conexão com o banco de dados! Aguarde alguns minutos e tente novamente.");
             }
         }
-
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    var servico = _context.Servicos.Find(id);
-        //    if (servico == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Remove a compra do contexto e salva as alterações no banco de dados.
-        //    _context.Servicos.Remove(servico);
-        //    _context.SaveChanges();
-
-        //    return NoContent();
-        //}
 
     }
 }

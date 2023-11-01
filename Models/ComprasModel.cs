@@ -1,4 +1,5 @@
-﻿using TesteUGB.Models.Enum;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TesteUGB.Models.Enum;
 
 namespace TesteUGB.Models
 {
@@ -17,7 +18,6 @@ namespace TesteUGB.Models
         public double ValorTotal { get; set; } // Soma do valor unitario x quantidade
         public long NumeroNotaFiscalProduto { get; set; }
         public long CodigoEAN { get; set; } // Código de Barras do Produto
-        //public byte[] Conteudo { get; set; } // gerar pdf
     }
 }
 

@@ -12,7 +12,7 @@ using TesteUGB.Data;
 namespace TesteUGB.Migrations
 {
     [DbContext(typeof(TesteUGBDbContext))]
-    [Migration("20231031225302_Inicio")]
+    [Migration("20231101000514_Inicio")]
     partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

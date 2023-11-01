@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TesteUGB.Models;
 using TesteUGB.Repositorio;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using TesteUGB.Data;
 
 namespace TesteUGB.Controllers
@@ -95,7 +91,6 @@ namespace TesteUGB.Controllers
                 return NotFound();
             }
 
-            // Remove a compra do contexto e salva as alterações no banco de dados.
             _context.Estoque.Remove(estoque);
             _context.SaveChanges();
 

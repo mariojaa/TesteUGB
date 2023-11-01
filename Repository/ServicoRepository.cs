@@ -16,7 +16,6 @@ namespace TesteUGB.Repositorio
         public async Task<IEnumerable<ServicoModel>> Buscar()
         {
           return await _context.Servicos.Include(s => s.Fornecedor).ToListAsync();
-            //return await _context.Servicos.ToListAsync();
         }
 
         public async Task<ServicoModel> FindById(int id)
@@ -24,16 +23,11 @@ namespace TesteUGB.Repositorio
             return await _context.Servicos.FindAsync(id);
         }
 
-        //public async Task Insert(ServicoModel servico)
-        //{
-        //    _context.Servicos.Add(servico);
-        //    await _context.SaveChangesAsync();
-        //}
         public async Task<int> Insert(ServicoModel servico)
         {
             _context.Servicos.Add(servico);
             await _context.SaveChangesAsync();
-            return servico.Id; // Retorna o ID do novo serviço inserido
+            return servico.Id;
         }
 
         public async Task EditarServico(ServicoModel servico)

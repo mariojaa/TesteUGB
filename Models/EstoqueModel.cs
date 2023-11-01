@@ -1,5 +1,4 @@
-﻿using System;
-using TesteUGB.Models.Enum;
+﻿using TesteUGB.Models.Enum;
 
 namespace TesteUGB.Models
 {

@@ -3,6 +3,7 @@ using TesteUGB.Data;
 using TesteUGB.Models;
 using TesteUGB.Repositories;
 
+
 namespace TesteUGB.Controllers
 {
     [Route("api/compras")]
@@ -11,7 +12,6 @@ namespace TesteUGB.Controllers
     {
         private readonly TesteUGBDbContext _context;
         private readonly ComprasRepository _comprasRepository;
-
         public ComprasController(TesteUGBDbContext context, ComprasRepository comprasRepository)
         {
             _context = context;
@@ -76,13 +76,11 @@ namespace TesteUGB.Controllers
             {
                 return NotFound();
             }
-
-            // Remove a compra do contexto e salva as alterações no banco de dados.
             _context.Compras.Remove(compra);
             _context.SaveChanges();
 
             return NoContent();
         }
-
     }
+
 }
